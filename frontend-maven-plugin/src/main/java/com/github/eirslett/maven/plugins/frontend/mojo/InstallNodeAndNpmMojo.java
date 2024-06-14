@@ -22,6 +22,12 @@ public final class InstallNodeAndNpmMojo extends AbstractFrontendMojo {
     private String nodeDownloadRoot;
 
     /**
+     * Where to download Node.js binary from. Defaults to https://nodejs.org/dist/
+     */
+    @Parameter(property = "nodeDownloadHash", required = false)
+    private String nodeDownloadHash;
+
+    /**
      * Where to download NPM binary from. Defaults to https://registry.npmjs.org/npm/-/
      */
     @Parameter(property = "npmDownloadRoot", required = false, defaultValue = NPMInstaller.DEFAULT_NPM_DOWNLOAD_ROOT)
@@ -79,30 +85,32 @@ public final class InstallNodeAndNpmMojo extends AbstractFrontendMojo {
         Server server = MojoUtils.decryptServer(serverId, session, decrypter);
         if (null != server) {
             factory.getNodeInstaller(proxyConfig)
-                .setNodeVersion(nodeVersion)
-                .setNodeDownloadRoot(nodeDownloadRoot)
-                .setNpmVersion(npmVersion)
-                .setUserName(server.getUsername())
-                .setPassword(server.getPassword())
-                .install();
+                    .setNodeVersion(nodeVersion)
+                    .setNodeDownloadRoot(nodeDownloadRoot)
+                    .setNodeDownloadHash(nodeDownloadHash)
+                    .setNpmVersion(npmVersion)
+                    .setUserName(server.getUsername())
+                    .setPassword(server.getPassword())
+                    .install();
             factory.getNPMInstaller(proxyConfig)
-                .setNodeVersion(nodeVersion)
-                .setNpmVersion(npmVersion)
-                .setNpmDownloadRoot(npmDownloadRoot)
-                .setUserName(server.getUsername())
-                .setPassword(server.getPassword())
-                .install();
+                    .setNodeVersion(nodeVersion)
+                    .setNpmVersion(npmVersion)
+                    .setNpmDownloadRoot(npmDownloadRoot)
+                    .setUserName(server.getUsername())
+                    .setPassword(server.getPassword())
+                    .install();
         } else {
             factory.getNodeInstaller(proxyConfig)
-                .setNodeVersion(nodeVersion)
-                .setNodeDownloadRoot(nodeDownloadRoot)
-                .setNpmVersion(npmVersion)
-                .install();
+                    .setNodeVersion(nodeVersion)
+                    .setNodeDownloadRoot(nodeDownloadRoot)
+                    .setNodeDownloadHash(nodeDownloadHash)
+                    .setNpmVersion(npmVersion)
+                    .install();
             factory.getNPMInstaller(proxyConfig)
-                .setNodeVersion(this.nodeVersion)
-                .setNpmVersion(this.npmVersion)
-                .setNpmDownloadRoot(npmDownloadRoot)
-                .install();
+                    .setNodeVersion(this.nodeVersion)
+                    .setNpmVersion(this.npmVersion)
+                    .setNpmDownloadRoot(npmDownloadRoot)
+                    .install();
         }
     }
 

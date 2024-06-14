@@ -3,7 +3,7 @@
 
     <groupId>com.github.eirslett</groupId>
     <artifactId>frontend-plugins</artifactId>
-    <version>1.15.1-SNAPSHOT</version>
+    <version>1.15.3-EC-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -52,12 +52,14 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>SG_Snapshots</id>
+            <name>SG Snapshot Repository</name>
+            <url>https://citnet.tech.ec.europa.eu/CITnet/nexus/repository/sg-snapshots/</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>SG_Releases</id>
+            <name>SG Repository</name>
+            <url>https://citnet.tech.ec.europa.eu/CITnet/nexus/repository/sg/</url>
         </repository>
     </distributionManagement>
 
